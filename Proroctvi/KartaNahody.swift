@@ -47,15 +47,15 @@ class KartaNáhody {
             }
         case .Hokynář:
             použij = { plán in
-                plán.běžnéPředměty.discard(plán.vesnice.předměty as! [BěžnýPředmět])
-                plán.vesnice.předměty = plán.běžnéPředměty.popLast(2)
+                plán.běžnéPředměty.odlož(plán.vesnice.předměty as! [BěžnýPředmět])
+                plán.vesnice.předměty = plán.běžnéPředměty.táhni(2)
             }
         case .MěstskýKupec:
             použij = { plán in
-                plán.běžnéPředměty.discard(plán.město.předměty.flatMap { $0 as? BěžnýPředmět })
-                plán.vzácnéPředměty.discard(plán.město.předměty.flatMap { $0 as? VzácnýPředmět })
-                plán.město.předměty = plán.běžnéPředměty.popLast(1) as [Předmět] +
-                    plán.vzácnéPředměty.popLast(1) as [Předmět]
+                plán.běžnéPředměty.odlož(plán.město.předměty.flatMap { $0 as? BěžnýPředmět })
+                plán.vzácnéPředměty.odlož(plán.město.předměty.flatMap { $0 as? VzácnýPředmět })
+                plán.město.předměty = plán.běžnéPředměty.táhni(1) as [Předmět] +
+                    plán.vzácnéPředměty.táhni(1) as [Předmět]
             }
         case .Les, .Hory, .Pláně:
             použij = { plán in
@@ -63,7 +63,7 @@ class KartaNáhody {
                     .filter { $0.druh.rawValue == druh.rawValue }
                     .forEach { pole in
                         if pole.dobrodružství.count < 2 {
-                            pole.dobrodružství.insert((plán.dobrodružství.popLast()!, false), atIndex: 0)
+                            pole.dobrodružství.insert((plán.dobrodružství.táhni()!, false), atIndex: 0)
                         }
                 }
             }

@@ -1,4 +1,8 @@
-class Postava {
+func == (vlevo: Postava, vpravo: Postava) -> Bool {
+    return vlevo.povolání == vpravo.povolání
+}
+
+class Postava: Hashable {
     enum Povolání: String {
         case Mystik = "Mystik"
         case Vědma = "Vědma"
@@ -20,6 +24,10 @@ class Postava {
     var životy: Int
     var zlato = 5
     var zkušenosti = 5
+    
+    var hashValue: Int {
+        get { return povolání.hashValue }
+    }
     
     var cechyZadarmo: [Cech] {
         get { return [cechy.0, cechy.1] }
