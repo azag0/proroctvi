@@ -4,16 +4,16 @@ func == (vlevo: Postava, vpravo: Postava) -> Bool {
 
 class Postava: Hashable, Bojující {
     enum Povolání: String {
-        case Mystik = "Mystik"
-        case Vědma = "Vědma"
-        case Iluzionistka = "Iluzionistka"
-        case Žoldák = "Žoldák"
+        case Mystik
+        case Vědma
+        case Iluzionistka
+        case Žoldák
         case PotulnýMnich = "Potulný mnich"
-        case Zvěd = "Zvěd"
-        case Paladin = "Paladin"
-        case Hraničářka = "Hraničářka"
-        case Zaklínačka = "Zaklínačka"
-        case Druid = "Druid"
+        case Zvěd
+        case Paladin
+        case Hraničářka
+        case Zaklínačka
+        case Druid
     }
     
     let povolání: Povolání

@@ -10,17 +10,16 @@ class HerníPlán {
     var umístěníPostav: [Postava: Pole]
     
     init(postavy: [Postava] = []) {
-        kartyNáhody = OdkládacíBalíček(karty: [
+        var náhody: [ZákladníKartaNáhody] = [
             .Charita, .DobréČasy, .Gilda, .Hokynář, .Hory, .JasnozřivýSen,
             .Klášter, .KlidnéČasy, .Krize, .Les, .Les, .LesníTábor, .MagickáVěž,
             .MagickýVítr, .MěstskýKupec, .Pevnost, .Pláně, .Pláně, .SvěžíVítr]
-            .map(KartaNáhody.init))
         if postavy.count > 3 {
-            kartyNáhody.karty.appendContentsOf([
+            náhody.appendContentsOf([
                 .Hory, .KlidnéČasy, .NabídkaVýcviku, .Pláně, .VolnýVýcvik,
-                .ZajímavéČasy]
-                .map(KartaNáhody.init))
+                .ZajímavéČasy])
         }
+        kartyNáhody = OdkládacíBalíček(karty: náhody.map { $0 as KartaNáhody })
         kartyNáhody.zamíchej()
         běžnéPředměty = OdkládacíBalíček(karty: [])
         vzácnéPředměty = OdkládacíBalíček(karty: [])

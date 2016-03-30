@@ -5,7 +5,7 @@ class Hra {
     var naTahu: Hráč { return hráči.filter { $0.postava == plán.naTahu } .first! }
     
     init(hráči: [Hráč] = []) {
-        self.plán = HerníPlán()
+        self.plán = HerníPlán(postavy: hráči.map { $0.postava! })
         self.hráči = hráči
     }
     
@@ -40,12 +40,8 @@ class Kolo {
 
 class Tah {
     func proveď(hra: Hra) {
-        let možnéPohyby = [Pohyb]()
-        let pohyb = hra.naTahu.kterýPohyb(možnéPohyby)
-        switch pohyb {
-        default:
-            break
-        }
+        let možnéPohyby: [Pohyb] = [.ZůsťanNaMístě]
+        hra.naTahu.kterýPohyb(možnéPohyby).táhni()
         let pole = hra.plán.umístěníPostav[hra.plán.naTahu]!
         if let divočina = pole as? Divočina {
             var dobrodružství = divočina.dobrodružství.map { $0.karta }
@@ -81,6 +77,20 @@ class Tah {
     }
 }
 
+enum Možnost {
+    case KartaPříležitosti
+    case Výcvik
+    case Oprava
+    case NákupProdej
+    case Léčení
+    case Magenergie
+    case Nocleh
+    case Artefakt
+    
+    func využij() {
+    }
+}
+
 enum Výsledek {
     case Prohra
     case Remíza
@@ -103,7 +113,7 @@ class Boj {
     }
 }
 
-enum Pohyb {
+enum Pohyb: String {
     case ZůsťanNaMístě
     case JdiPěšky
     case JeďNaKoni
@@ -114,6 +124,13 @@ enum Pohyb {
     case MístoPohybuPole
     case MístoPohybuPředmět
     case JdiDoSféry
+    
+    func táhni() {
+        switch self {
+        default:
+            print("Provádím tah: \(rawValue)")
+        }
+    }
 }
 
 enum Upravovač {

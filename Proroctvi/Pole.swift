@@ -16,17 +16,11 @@ class Pole {
     }
 }
 
-class Možnost {
-    func využij() {
-        
-    }
-}
-
 class Divočina: Pole {
     enum Druh: String {
-        case Les = "Les"
-        case Pláně = "Pláně"
-        case Hory = "Hory"
+        case Les
+        case Pláně
+        case Hory
     }
     
     let druh: Druh
@@ -46,8 +40,8 @@ protocol Civilizace {}
 
 class Osídlení: Pole, Civilizace {
     enum Druh: String {
-        case Město = "Město"
-        case Vesnice = "Vesnice"
+        case Město
+        case Vesnice
     }
     
     var předměty: [Předmět]

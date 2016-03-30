@@ -1,0 +1,5 @@
+let hráč = HloupýHráč()
+hráč.postava = Postava(povolání: .Druid)
+let hra = Hra(hráči: [hráč])
+hra.proveďKolo()
+hra.proveďKolo()
