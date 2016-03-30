@@ -8,8 +8,6 @@ class HerníPlán {
     let sféry: [Sféra]
     let kostky = [Kostka(), Kostka()]
     var umístěníPostav: [Postava: Pole]
-    var postavy: [Postava]
-    var hra: Hra? = nil
     
     init(postavy: [Postava] = []) {
         kartyNáhody = OdkládacíBalíček(karty: [
@@ -23,6 +21,7 @@ class HerníPlán {
                 .ZajímavéČasy]
                 .map(KartaNáhody.init))
         }
+        kartyNáhody.zamíchej()
         běžnéPředměty = OdkládacíBalíček(karty: [])
         vzácnéPředměty = OdkládacíBalíček(karty: [])
         dobrodružství = OdkládacíBalíček(karty: [])
@@ -56,48 +55,29 @@ class HerníPlán {
             Divočina(druh: .Pláně),
             Divočina(druh: .Hory, sféra: sféry[4]),
             PoleCechu(cech: .Pevnost),
-            Divočina(druh: .Pláně, přístav: Přístav(), sféra: sféry[5])
+            Divočina(druh: .Pláně, přístav: Přístav(), sféra: sféry[4])
         ]
         umístěníPostav = [:]
         for postava in postavy {
-            umístěníPostav[postava] = PoleCechu(cech: postava.cechy.0)
+            umístěníPostav[postava] = PoleCechu(cech: postava.cechy.first!)
         }
-        self.postavy = postavy
         propojPřístavy()
     }
     
+    var postavy: [Postava] { return Array(self.umístěníPostav.keys) }
+    var naTahu: Postava { return postavy.first! }
+    var neníNaTahu: [Postava] { return postavy.filter { $0 !== naTahu } }
+    
     var vesnice: Osídlení {
-        get {
-            return pole.flatMap { $0 as? Osídlení }
-                .filter { $0.druh == .Vesnice }
-                .first!
-        }
+        return pole.flatMap { $0 as? Osídlení } .filter { $0.druh == .Vesnice } .first!
     }
     
     var město: Osídlení {
-        get {
-            return pole.flatMap { $0 as? Osídlení }
-                .filter { $0.druh == .Město }
-                .first!
-        }
-    }
-    
-    var naTahu: Postava {
-        get { return postavy.first! }
-    }
-    
-    var neníNaTahu: [Postava] {
-        get { return postavy.filter { $0 !== naTahu } }
+        return pole.flatMap { $0 as? Osídlení } .filter { $0.druh == .Město } .first!
     }
     
     func poleCechu(cech: Cech) -> Pole {
         return pole.flatMap { $0 as? PoleCechu } .filter { $0.cech == cech } .first!
-    }
-    
-    var hráčNaTahu: Hráč? {
-        return hra?.hráči
-            .filter { $0.postava === naTahu }
-            .first
     }
     
     func nováSchopnost(cech: Cech) {
@@ -107,7 +87,7 @@ class HerníPlán {
                 guard let nováSchopnost = schopnosti[cech]!.táhni() else { return }
                 pole.schopnosti.append(nováSchopnost)
                 if pole.schopnosti.count > 2 {
-                    schopnosti[cech]!.odlož(pole.schopnosti.popLast()!)
+                    schopnosti[cech]!.odhoď(pole.schopnosti.popLast()!)
                 }
         }
     }
@@ -117,6 +97,17 @@ class HerníPlán {
         for (i, přístavníPole) in přístavy.enumerate() {
             přístavníPole.přístav!.append(přístavy[i > 0 ? i-1 : přístavy.count-1])
             přístavníPole.přístav!.append(přístavy[i < přístavy.count-1 ? i+1 : 0])
+        }
+    }
+    
+    func odhoďPředměty(předměty: [Předmět]) {
+        běžnéPředměty.odhoď(předměty.flatMap { $0 as? BěžnýPředmět })
+        vzácnéPředměty.odhoď(předměty.flatMap { $0 as? VzácnýPředmět })
+    }
+    
+    func odhoďSchopnosti(schopnosti: [Schopnost]) {
+        schopnosti.forEach { schopnost in
+            self.schopnosti[schopnost.cech]!.odhoď(schopnost)
         }
     }
 }

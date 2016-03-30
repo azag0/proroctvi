@@ -30,26 +30,26 @@ class Balíček<Karta> {
     }
 }
 
-protocol Odkládací {
+protocol Odhoditelný {
     associatedtype Karta
-    func odlož(karta: Karta)
-    func odlož(karty: [Karta])
+    func odhoď(karta: Karta)
+    func odhoď(karty: [Karta])
 }
 
-class RotujícíBalíček<Karta>: Balíček<Karta>, Odkládací {
+class RotujícíBalíček<Karta>: Balíček<Karta>, Odhoditelný {
     override init(karty: [Karta]) { super.init(karty: karty) }
     
-    func odlož(karta: Karta) {
+    func odhoď(karta: Karta) {
         karty.append(karta)
     }
     
-    func odlož(karty: [Karta]) {
+    func odhoď(karty: [Karta]) {
         self.karty.appendContentsOf(karty)
     }
 
 }
 
-class OdkládacíBalíček<Karta>: Balíček<Karta>, Odkládací {
+class OdkládacíBalíček<Karta>: Balíček<Karta>, Odhoditelný {
     var odkládacíHromádka: [Karta] = []
     
     override init(karty: [Karta]) { super.init(karty: karty) }
@@ -70,11 +70,11 @@ class OdkládacíBalíček<Karta>: Balíček<Karta>, Odkládací {
         return super.táhni(n)
     }
     
-    func odlož(karta: Karta) {
+    func odhoď(karta: Karta) {
         odkládacíHromádka.append(karta)
     }
     
-    func odlož(karty: [Karta]) {
+    func odhoď(karty: [Karta]) {
         odkládacíHromádka.appendContentsOf(karty)
     }
 }

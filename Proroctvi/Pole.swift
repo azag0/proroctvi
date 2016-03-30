@@ -23,13 +23,14 @@ class Divočina: Pole {
     }
     
     let druh: Druh
-    var dobrodružství = [(karta: Dobrodružství, odkrytá: Bool)]()
+    var dobrodružství: [(karta: Dobrodružství, odkrytá: Bool)]
     
     init(druh: Druh,
          sféra: Sféra? = nil,
          brána: MagickáBrána? = nil,
          přístav: Přístav? = nil) {
         self.druh = druh
+        dobrodružství = []
         super.init(název: druh.rawValue, sféra: sféra, brána: brána, přístav: přístav)
     }
 }
@@ -42,7 +43,7 @@ class Osídlení: Pole, Civilizace {
         case Vesnice = "Vesnice"
     }
     
-    var předměty = [Předmět]()
+    var předměty: [Předmět]
     let druh: Druh
     
     init(druh: Druh,
@@ -50,19 +51,21 @@ class Osídlení: Pole, Civilizace {
          brána: MagickáBrána? = nil,
          přístav: Přístav? = nil) {
         self.druh = druh
+        předměty = []
         super.init(název: druh.rawValue, sféra: sféra, brána: brána, přístav: přístav)
     }
 }
 
 class PoleCechu: Pole, Civilizace {
     let cech: Cech
-    var schopnosti = [Schopnost]()
+    var schopnosti: [Schopnost]
     
     init(cech: Cech,
          sféra: Sféra? = nil,
          brána: MagickáBrána? = nil,
          přístav: Přístav? = nil) {
         self.cech = cech
+        schopnosti = []
         super.init(název: cech.rawValue, sféra: sféra, brána: brána, přístav: přístav)
     }
 }
