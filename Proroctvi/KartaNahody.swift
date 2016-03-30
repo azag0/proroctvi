@@ -110,7 +110,7 @@ class KartaNáhody {
             }
         case .VolnýVýcvik:
             použij = { plán in
-                return .Dotaz({ hráč in
+                .Dotaz({ hráč in
                     plán.nováSchopnost(hráč.volnýVýcvikKterýCech(plán))
                 })
             }
@@ -121,11 +121,11 @@ class KartaNáhody {
             }
         case .KlidnéČasy:
             použij = { plán in
-                return .UpravKolo({ kolo in kolo.početTahů += 1 })
+                .UpravKolo({ kolo in kolo.početTahů += 1 })
             }
         case .JasnozřivýSen:
             použij = { plán in
-                return .Dotaz({ hráč in
+                .Dotaz({ hráč in
                     var sféra = hráč.jasnozřivýSenKteráSféra(plán)
                     sféra.odkryj()
                 })

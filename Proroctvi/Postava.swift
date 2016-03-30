@@ -2,7 +2,7 @@ func == (vlevo: Postava, vpravo: Postava) -> Bool {
     return vlevo.povolání == vpravo.povolání
 }
 
-class Postava: Hashable {
+class Postava: Hashable, Bojující {
     enum Povolání: String {
         case Mystik = "Mystik"
         case Vědma = "Vědma"

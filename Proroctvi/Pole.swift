@@ -3,6 +3,7 @@ class Pole {
     let sféra: Sféra?
     let brána: MagickáBrána?
     var přístav: Přístav?
+    let možnosti: [Možnost] = []
     
     init(název: String,
          sféra: Sféra? = nil,
@@ -12,6 +13,12 @@ class Pole {
         self.sféra = sféra
         self.brána = brána
         self.přístav = přístav
+    }
+}
+
+class Možnost {
+    func využij() {
+        
     }
 }
 

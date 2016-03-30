@@ -1,7 +1,7 @@
 protocol Dobrodružství {
 }
 
-class Stvůra {
+class Stvůra: Bojující {
 }
 
 class Nestvůra: Stvůra, Dobrodružství {
