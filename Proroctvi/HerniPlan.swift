@@ -1,4 +1,4 @@
-class HerníPlán {
+class HerníPlán: CustomStringConvertible {
     let pole: [Pole]
     let běžnéPředměty: OdkládacíBalíček<BěžnýPředmět>
     let vzácnéPředměty: OdkládacíBalíček<VzácnýPředmět>
@@ -7,7 +7,23 @@ class HerníPlán {
     let schopnosti: [Cech: RotujícíBalíček<Schopnost>]
     let sféry: [Sféra]
     let kostky = [Kostka(), Kostka()]
-    var umístěníPostav: [Postava: Pole]
+    var umístěníPostav: [Postava: Int] = [:]
+    var postavy: [Postava]
+    
+    var description: String {
+        var desc = "Herní Plán:\n"
+        desc += "* postavy: \([Postava: Pole](umístěníPostav.map { ($0, self[$1]) }))"
+        return desc
+    }
+    
+    func polePostavy(postava: Postava) -> Pole {
+        return pole[circ: umístěníPostav[postava]!]
+    }
+    
+    subscript(idx: Int) -> Pole { return self.pole[circ: idx] }
+    subscript(pole: Pole) -> Int { return self.pole.indexOf { $0 === pole }! }
+    subscript(cech: Cech) -> Int { return self.pole.indexOf { ($0 as? PoleCechu)?.cech == cech }! }
+    subscript(cech: Cech) -> Pole { return self[self.pole.indexOf { ($0 as? PoleCechu)?.cech == cech }!] }
     
     init(postavy: [Postava] = []) {
         var náhody: [ZákladníKartaNáhody] = [
@@ -56,15 +72,15 @@ class HerníPlán {
             PoleCechu(cech: .Pevnost),
             Divočina(druh: .Pláně, přístav: Přístav(), sféra: sféry[4])
         ]
-        umístěníPostav = [:]
-        for postava in postavy {
-            umístěníPostav[postava] = PoleCechu(cech: postava.cechy.first!)
-        }
+        self.postavy = postavy
+        umístěníPostav = postavy.map { ($0, self[$0.cechy.first!]) }
         propojPřístavy()
     }
     
-    var postavy: [Postava] { return Array(self.umístěníPostav.keys) }
-    var naTahu: Postava { return postavy.first! }
+    var naTahu: Postava {
+        get { return postavy.first! }
+        set { postavy[0] = newValue }
+    }
     var neníNaTahu: [Postava] { return postavy.filter { $0 !== naTahu } }
     
     var vesnice: Osídlení {
@@ -94,8 +110,8 @@ class HerníPlán {
     func propojPřístavy() {
         let přístavy = pole.filter { $0.přístav != nil }
         for (i, přístavníPole) in přístavy.enumerate() {
-            přístavníPole.přístav!.append(přístavy[i > 0 ? i-1 : přístavy.count-1])
-            přístavníPole.přístav!.append(přístavy[i < přístavy.count-1 ? i+1 : 0])
+            přístavníPole.přístav!.append(přístavy[circ: i])
+            přístavníPole.přístav!.append(přístavy[circ: i])
         }
     }
     
@@ -105,8 +121,6 @@ class HerníPlán {
     }
     
     func odhoďSchopnosti(schopnosti: [Schopnost]) {
-        schopnosti.forEach { schopnost in
-            self.schopnosti[schopnost.cech]!.odhoď(schopnost)
-        }
+        schopnosti.forEach { self.schopnosti[$0.cech]!.odhoď($0) }
     }
 }

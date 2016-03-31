@@ -1,7 +1,7 @@
 import Foundation
 
 func random(maximum: Int) -> Int {
-    return Int(arc4random_uniform(UInt32(maximum)))
+    return numericCast(arc4random_uniform(numericCast(maximum)))
 }
 
 class Kostka {

@@ -1,9 +1,11 @@
-class Pole {
+class Pole: CustomStringConvertible {
     let název: String
     let sféra: Sféra?
     let brána: MagickáBrána?
     var přístav: Přístav?
     let možnosti: [Možnost] = []
+    
+    var description: String { return název }
     
     init(název: String,
          sféra: Sféra? = nil,

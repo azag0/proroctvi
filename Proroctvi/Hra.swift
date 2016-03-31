@@ -2,7 +2,7 @@ class Hra {
     let plán: HerníPlán
     let hráči: [Hráč]
     
-    var naTahu: Hráč { return hráči.filter { $0.postava == plán.naTahu } .first! }
+    var hráčNaTahu: Hráč { return hráči.filter { $0.postava == plán.naTahu } .first! }
     
     init(hráči: [Hráč] = []) {
         self.plán = HerníPlán(postavy: hráči.map { $0.postava! })
@@ -11,18 +11,20 @@ class Hra {
     
     func proveďKolo() {
         let kolo = Kolo()
+        print("Postava na tahu: \(plán.naTahu)")
         let kartaNáhody = plán.kartyNáhody.táhni()!
         if let upravovač = kartaNáhody.použij(plán) {
             switch upravovač {
             case .Dotaz(let dotaz):
-                dotaz(naTahu)
+                dotaz(hráčNaTahu)
             case .UpravKolo(let uprav):
                 uprav(kolo)
             }
         }
         plán.kartyNáhody.odhoď(kartaNáhody)
         kolo.proveďTahy(self)
-        if let uprav = plán.naTahu.upravMaxima() { uprav(naTahu, plán) }
+        if let uprav = plán.naTahu.upravMaxima() { uprav(hráčNaTahu, plán) }
+        plán.postavy.append(plán.postavy.removeFirst())
     }
 }
 
@@ -40,38 +42,34 @@ class Kolo {
 
 class Tah {
     func proveď(hra: Hra) {
-        let možnéPohyby: [Pohyb] = [.ZůsťanNaMístě]
-        hra.naTahu.kterýPohyb(možnéPohyby).táhni()
-        let pole = hra.plán.umístěníPostav[hra.plán.naTahu]!
+        let možnéPohyby: [Pohyb] = [.JdiPěšky(.Vlevo)]
+        hra.hráčNaTahu.kterýPohyb(možnéPohyby).táhni(&hra.plán.naTahu, umístění: &hra.plán.umístěníPostav)
+        let pole = hra.plán.polePostavy(hra.plán.naTahu)
         if let divočina = pole as? Divočina {
-            var dobrodružství = divočina.dobrodružství.map { $0.karta }
-            var nestvůry = dobrodružství.flatMap { $0 as? Nestvůra }
-            dobrodružství = dobrodružství.flatMap { $0 as? Příležitost }
-            if nestvůry.count > 1 { hra.naTahu.pořadíNestvůr(&nestvůry) }
+            divočina.dobrodružství = divočina.dobrodružství.map { karta, _ in (karta, true) }
+            var nestvůry = divočina.dobrodružství.flatMap { $0.karta as? Nestvůra }
+            if nestvůry.count > 1 { hra.hráčNaTahu.pořadíNestvůr(&nestvůry) }
             while nestvůry.count > 0 {
                 let nestvůra = nestvůry.removeFirst()
                 let výsledek = Boj(útočník: hra.plán.naTahu, obránce: nestvůra).bojujte()
                 switch výsledek {
                 case .Prohra, .Remíza:
-                    nestvůry.insert(nestvůra, atIndex: 0)
+                    return
                 case .Vítězství:
+                    divočina.dobrodružství.removeAtIndex(
+                        divočina.dobrodružství.indexOf { $0.karta as? Nestvůra === nestvůra }!
+                    )
                     hra.plán.dobrodružství.odhoď(nestvůra)
-                }
-                dobrodružství.insertContentsOf(nestvůry as [Dobrodružství], at: 0)
-                divočina.dobrodružství = dobrodružství.map { ($0, true) }
-                switch výsledek {
-                case .Prohra, .Remíza: return
-                case .Vítězství: break
                 }
             }
         }
-        let dalšíPostavy = hra.plán.postavy.filter { hra.plán.umístěníPostav[$0] === pole }
+        let dalšíPostavy = hra.plán.postavy.filter { hra.plán.umístěníPostav[$0] == hra.plán[pole] }
         if dalšíPostavy.count > 0 {
-            if let protivník = hra.naTahu.bojujSKterouPostavou(dalšíPostavy) {
+            if let protivník = hra.hráčNaTahu.bojujSKterouPostavou(dalšíPostavy) {
                 Boj(útočník: hra.plán.naTahu, obránce: protivník).bojujte()
             }
         }
-        while let možnost = hra.naTahu.vyberMožnost(pole.možnosti) {
+        while let možnost = hra.hráčNaTahu.vyberMožnost(pole.možnosti) {
             možnost.využij()
         }
     }
@@ -113,9 +111,11 @@ class Boj {
     }
 }
 
-enum Pohyb: String {
+enum Pohyb: CustomStringConvertible {
+    enum Směr: String { case Vlevo, Vpravo }
+    
     case ZůsťanNaMístě
-    case JdiPěšky
+    case JdiPěšky(Směr)
     case JeďNaKoni
     case PlujNaLodi
     case PoužijBránu
@@ -125,10 +125,24 @@ enum Pohyb: String {
     case MístoPohybuPředmět
     case JdiDoSféry
     
-    func táhni() {
+    var description: String {
         switch self {
-        default:
-            print("Provádím tah: \(rawValue)")
+        case .ZůsťanNaMístě: return "Stůj"
+        case .JdiPěšky(let směr): return "Jdi \(směr)"
+        default: return "Neznámý tah"
+        }
+    }
+    
+    func táhni(inout postava: Postava, inout umístění: [Postava: Int]) {
+        print("Provádím tah: \(self)")
+        switch self {
+        case .ZůsťanNaMístě: break
+        case .JdiPěšky(let směr):
+            switch směr {
+            case .Vlevo: umístění[postava]! -= 1
+            case .Vpravo: umístění[postava]! += 1
+            }
+        default: break
         }
     }
 }

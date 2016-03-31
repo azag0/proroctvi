@@ -2,7 +2,7 @@ func == (vlevo: Postava, vpravo: Postava) -> Bool {
     return vlevo.povolání == vpravo.povolání
 }
 
-class Postava: Hashable, Bojující {
+class Postava: Hashable, Bojující, CustomStringConvertible {
     enum Povolání: String {
         case Mystik
         case Vědma
@@ -29,6 +29,9 @@ class Postava: Hashable, Bojující {
     
     var hashValue: Int { return povolání.hashValue }
     var cechyZadarmo: [Cech] { return cechy }
+    var description: String {
+        return String(povolání)
+    }
     
     var síla: Int {
         get { return životy }

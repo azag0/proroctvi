@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C0C4C3D1CAA885400F8FEAA /* HerniPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0C4C3C1CAA885400F8FEAA /* HerniPlan.swift */; };
 		9C6B36481CAAC551007E1ECD /* Balicek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6B36471CAAC551007E1ECD /* Balicek.swift */; };
+		9CCA752A1CAD538C00C4D7AE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA75291CAD538C00C4D7AE /* Extensions.swift */; };
 		9CE258541CAB0E3B006204BF /* Pole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE258531CAB0E3B006204BF /* Pole.swift */; };
 		9CE258561CAB0E6D006204BF /* Predmety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE258551CAB0E6D006204BF /* Predmety.swift */; };
 		9CE258581CAB0E8E006204BF /* Dobrodruzstvi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE258571CAB0E8E006204BF /* Dobrodruzstvi.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		9C0C4C3C1CAA885400F8FEAA /* HerniPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerniPlan.swift; sourceTree = "<group>"; };
 		9C6B36471CAAC551007E1ECD /* Balicek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balicek.swift; sourceTree = "<group>"; };
+		9CCA75291CAD538C00C4D7AE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9CE258531CAB0E3B006204BF /* Pole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pole.swift; sourceTree = "<group>"; };
 		9CE258551CAB0E6D006204BF /* Predmety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predmety.swift; sourceTree = "<group>"; };
 		9CE258571CAB0E8E006204BF /* Dobrodruzstvi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dobrodruzstvi.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				9CE492131CAA84D70028D7A6 /* Postava.swift */,
 				9C0C4C3C1CAA885400F8FEAA /* HerniPlan.swift */,
 				9CE492111CAA84AA0028D7A6 /* KartaNahody.swift */,
+				9CCA75291CAD538C00C4D7AE /* Extensions.swift */,
 			);
 			path = Proroctvi;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				9CE258621CAB1BB6006204BF /* Kostka.swift in Sources */,
 				9CE492121CAA84AA0028D7A6 /* KartaNahody.swift in Sources */,
 				9CE2585E1CAB1B96006204BF /* Hra.swift in Sources */,
+				9CCA752A1CAD538C00C4D7AE /* Extensions.swift in Sources */,
 				9CE258581CAB0E8E006204BF /* Dobrodruzstvi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +297,7 @@
 				9CF14A1F1CA957C80026675F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -30,9 +30,9 @@ enum ZákladníKartaNáhody: String, KartaNáhody {
     func použij(plán: HerníPlán) -> Upravovač? {
         switch self {
         case .Charita:
-            let minZlato = plán.postavy.map({ $0.zlato }).minElement()
-            let minSíla = plán.postavy.map({ $0.síla }).minElement()
-            let minVůle = plán.postavy.map({ $0.vůle }).minElement()
+            let minZlato = plán.postavy.map { $0.zlato } .minElement()
+            let minSíla = plán.postavy.map { $0.síla } .minElement()
+            let minVůle = plán.postavy.map { $0.vůle } .minElement()
             plán.postavy.forEach { postava in
                 if postava.zlato == minZlato { postava.zlato += 3 }
                 if postava.síla == minSíla { postava.síla += 1 }
