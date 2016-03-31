@@ -10,6 +10,11 @@
 		9C0C4C3D1CAA885400F8FEAA /* HerniPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0C4C3C1CAA885400F8FEAA /* HerniPlan.swift */; };
 		9C6B36481CAAC551007E1ECD /* Balicek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6B36471CAAC551007E1ECD /* Balicek.swift */; };
 		9CCA752A1CAD538C00C4D7AE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA75291CAD538C00C4D7AE /* Extensions.swift */; };
+		9CCA752C1CAD847D00C4D7AE /* Pohyb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA752B1CAD847D00C4D7AE /* Pohyb.swift */; };
+		9CCA752E1CAD84C100C4D7AE /* Kolo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA752D1CAD84C100C4D7AE /* Kolo.swift */; };
+		9CCA75301CAD84D100C4D7AE /* Tah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA752F1CAD84D100C4D7AE /* Tah.swift */; };
+		9CCA75321CAD84ED00C4D7AE /* Moznost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA75311CAD84ED00C4D7AE /* Moznost.swift */; };
+		9CCA75341CAD851500C4D7AE /* Boj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA75331CAD851500C4D7AE /* Boj.swift */; };
 		9CE258541CAB0E3B006204BF /* Pole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE258531CAB0E3B006204BF /* Pole.swift */; };
 		9CE258561CAB0E6D006204BF /* Predmety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE258551CAB0E6D006204BF /* Predmety.swift */; };
 		9CE258581CAB0E8E006204BF /* Dobrodruzstvi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE258571CAB0E8E006204BF /* Dobrodruzstvi.swift */; };
@@ -40,6 +45,11 @@
 		9C0C4C3C1CAA885400F8FEAA /* HerniPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HerniPlan.swift; sourceTree = "<group>"; };
 		9C6B36471CAAC551007E1ECD /* Balicek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balicek.swift; sourceTree = "<group>"; };
 		9CCA75291CAD538C00C4D7AE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9CCA752B1CAD847D00C4D7AE /* Pohyb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pohyb.swift; sourceTree = "<group>"; };
+		9CCA752D1CAD84C100C4D7AE /* Kolo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kolo.swift; sourceTree = "<group>"; };
+		9CCA752F1CAD84D100C4D7AE /* Tah.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tah.swift; sourceTree = "<group>"; };
+		9CCA75311CAD84ED00C4D7AE /* Moznost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moznost.swift; sourceTree = "<group>"; };
+		9CCA75331CAD851500C4D7AE /* Boj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boj.swift; sourceTree = "<group>"; };
 		9CE258531CAB0E3B006204BF /* Pole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pole.swift; sourceTree = "<group>"; };
 		9CE258551CAB0E6D006204BF /* Predmety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predmety.swift; sourceTree = "<group>"; };
 		9CE258571CAB0E8E006204BF /* Dobrodruzstvi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dobrodruzstvi.swift; sourceTree = "<group>"; };
@@ -89,6 +99,11 @@
 				9CE258611CAB1BB6006204BF /* Kostka.swift */,
 				9CE2585F1CAB1BA5006204BF /* Hrac.swift */,
 				9CE2585D1CAB1B96006204BF /* Hra.swift */,
+				9CCA75331CAD851500C4D7AE /* Boj.swift */,
+				9CCA75311CAD84ED00C4D7AE /* Moznost.swift */,
+				9CCA752F1CAD84D100C4D7AE /* Tah.swift */,
+				9CCA752D1CAD84C100C4D7AE /* Kolo.swift */,
+				9CCA752B1CAD847D00C4D7AE /* Pohyb.swift */,
 				9CE2585B1CAB1B7E006204BF /* Schopnost.swift */,
 				9CE258591CAB0EAF006204BF /* Sfera.swift */,
 				9CE258571CAB0E8E006204BF /* Dobrodruzstvi.swift */,
@@ -164,18 +179,23 @@
 				9C0C4C3D1CAA885400F8FEAA /* HerniPlan.swift in Sources */,
 				9CE258561CAB0E6D006204BF /* Predmety.swift in Sources */,
 				9C6B36481CAAC551007E1ECD /* Balicek.swift in Sources */,
+				9CCA75321CAD84ED00C4D7AE /* Moznost.swift in Sources */,
 				9CE2585A1CAB0EAF006204BF /* Sfera.swift in Sources */,
 				9CE492141CAA84D70028D7A6 /* Postava.swift in Sources */,
 				9CE492161CAA84ED0028D7A6 /* Cech.swift in Sources */,
 				9CE2585C1CAB1B7E006204BF /* Schopnost.swift in Sources */,
 				9CE258541CAB0E3B006204BF /* Pole.swift in Sources */,
+				9CCA752C1CAD847D00C4D7AE /* Pohyb.swift in Sources */,
 				9CE258601CAB1BA5006204BF /* Hrac.swift in Sources */,
 				9CF14A1A1CA957C80026675F /* main.swift in Sources */,
 				9CE258621CAB1BB6006204BF /* Kostka.swift in Sources */,
 				9CE492121CAA84AA0028D7A6 /* KartaNahody.swift in Sources */,
 				9CE2585E1CAB1B96006204BF /* Hra.swift in Sources */,
 				9CCA752A1CAD538C00C4D7AE /* Extensions.swift in Sources */,
+				9CCA75301CAD84D100C4D7AE /* Tah.swift in Sources */,
 				9CE258581CAB0E8E006204BF /* Dobrodruzstvi.swift in Sources */,
+				9CCA752E1CAD84C100C4D7AE /* Kolo.swift in Sources */,
+				9CCA75341CAD851500C4D7AE /* Boj.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,3 +18,15 @@ extension SequenceType {
         return [T: U](try map(transform))
     }
 }
+
+extension Array {
+    mutating func shuffle() {
+        if count < 2 { return }
+        for i in 0..<count-1 {
+            let j = random(count-i)+i
+            if i != j {
+                swap(&self[i], &self[j])
+            }
+        }
+    }
+}
